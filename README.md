@@ -1,10 +1,25 @@
-# Telegram ID Link Bot
+# Telegram Unique Link Bot
 
-כל משתמש שלוחץ `/start` מקבל כפתור לפתיחת שיחה איתו לפי Telegram ID.
+הבוט נותן לכל משתמש קישור Telegram ייחודי המבוסס על Telegram ID.
+
+## מה קורה ב-/start
+
+הבוט מציג:
+- Telegram ID של המשתמש
+- קישור אישי בפורמט `https://t.me/BOT_USERNAME?start=u_ID`
+
+כאשר מישהו פותח את הקישור, הבוט מקבל את ה-ID המקודד בקישור ויכול לזהות למי הקישור שייך.
+
+## חשוב
+
+הקישור הייחודי פותח את הבוט, לא צ'אט ישיר עם המשתמש.
+
+Telegram חוסמת שימוש ב-`tg://user?id=...` במקרים שבהם הגדרות הפרטיות של המשתמש לא מאפשרות זאת. אי אפשר לעקוף את ההגבלה באמצעות הבוט.
 
 ## Render
 
-סוג שירות: Web Service
+Service type:
+Web Service
 
 Build Command:
 ```bash
@@ -17,15 +32,19 @@ python bot.py
 ```
 
 Environment Variables:
+
 ```text
-TELEGRAM_BOT_TOKEN=YOUR_BOT_TOKEN
+TELEGRAM_BOT_TOKEN=YOUR_NEW_BOT_TOKEN
+BOT_USERNAME=YOUR_BOT_USERNAME
 ```
 
-אין צורך להגדיר `WEBHOOK_URL` ב-Render. הקוד משתמש אוטומטית ב-`RENDER_EXTERNAL_URL`.
+למשל אם הבוט הוא `@my_example_bot`:
 
-## איך זה עובד
+```text
+BOT_USERNAME=my_example_bot
+```
 
-משתמש שולח `/start`, והבוט מזהה את ה-Telegram ID שלו ומציג כפתור לפתיחת שיחה.
+אין צורך להגדיר `PORT` או `WEBHOOK_URL`.
 
 ## בדיקה
 
@@ -34,6 +53,13 @@ TELEGRAM_BOT_TOKEN=YOUR_BOT_TOKEN
 https://YOUR-SERVICE.onrender.com/health
 ```
 
-צריך לקבל `OK`.
+צריך לקבל:
+```text
+OK
+```
 
-אל תעלה את Bot Token ל-GitHub.
+ואז שלח `/start` לבוט.
+
+## Security
+
+אל תעלה Bot Token ל-GitHub.
